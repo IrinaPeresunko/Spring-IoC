@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"	
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/util
+		 http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+ 		
+ 		<!--USED FOR SETTER INJECTION
+ 		 <bean id="messageRenderer" class =
+ 		 "ua.spring.tutorial.SpringTutorialXml.StandartOutMessageRenderer">
+ 			 <property name="messageProvider">
+ 		 		<ref bean = "messageProvider"/>
+ 		 	</property>
+ 		 </bean>
+ 		 <bean id="messageProvider" class =
+ 		 "ua.spring.tutorial.SpringTutorialXml.HelloWorldMessageProvider"/>-->
+ 		 
+ 		 <!-- USED FOR CONSTRUCTOR INJECTION 
+ 		 <bean id="messageProvider" 
+ 		 class="ua.spring.tutorial.SpringTutorialXml.ConfigurableMessageProvider">
+ 		 	<constructor-arg>
+ 		 		<value>This is a configurable message</value>
+ 		 	</constructor-arg>
+ 		 </bean>-->
+ 		 
+ 		 <!-- CONSTRUCTOR CONFUSIon 
+ 		  <bean id="constructorConfusion" 
+ 		 class="ua.spring.tutorial.SpringTutorialXml.ConstructorConfusion">
+ 		 	<constructor-arg type="int">
+ 		 		<value>90</value>
+ 		 	</constructor-arg>
+ 		 </bean>-->
+ 		 
+ 		 <!-- injecting built-in vals sample -->
+    <bean id="injectSimple" class="ua.spring.tutorial.SpringTutorialXml.InjectSimple">
+        <property name="name">
+            <value>John Smith</value>
+        </property>
+        <property name="age">
+            <value>35</value>
+        </property>
+        <property name="height">
+            <value>1.78</value>
+        </property>
+        <property name="programmer">
+            <value>true</value>
+        </property>
+        <property name="ageInSeconds">
+            <value>1103760000</value>
+        </property>
+    </bean> 
+    
+    <!-- injecting values using SpEL -->
+    <bean id="injectSimpleConfig" class="ua.spring.tutorial.SpringTutorialXml.InjectSimpleConfig"/>    
+    
+    <!-- injecting built-in vals sample -->
+    <bean id="injectSimpleSpel" class="ua.spring.tutorial.SpringTutorialXml.InjectSimpleSpel">
+        <property name="name">
+            <value>#{injectSimpleConfig.name}</value>
+        </property>
+        <property name="age">
+            <value>#{injectSimpleConfig.age + 1}</value>
+        </property>
+        <property name="height">
+            <value>#{injectSimpleConfig.height}</value>
+        </property>
+        <property name="programmer">
+            <value>#{injectSimpleConfig.programmer}</value>
+        </property>
+        <property name="ageInSeconds">
+            <value>#{injectSimpleConfig.ageInSeconds}</value>
+        </property>
+    </bean>        
+</beans>
